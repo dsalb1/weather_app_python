@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+<title>Weather App</title>
+<script src='{{ url_for("main.js") }}'></script>
+<body class="content">
+<header>
+    {% block header %}{% endblock %}
+  </header>
+  {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+  {% endfor %}
+  {% block content %}{% endblock %}
+</body>
+</html>

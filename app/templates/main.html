@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>Weather App</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="GET">
+        <label>Please enter your zip code to get the weather</label>
+        <input name="zipcode" type="text">
+        <input type="submit" value="Submit">
+    </form>
+{% endblock %}
