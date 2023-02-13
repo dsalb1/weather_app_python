@@ -1,7 +1,9 @@
 <!doctype html>
 <html lang="en">
 <title>Weather App</title>
-<script src='{{ url_for("main.js") }}'></script>
+<script src="{{ asset.url_for('main.js') }}"></script>
+<link rel="stylesheet" href="{{ asset.url_for('styles.css') }}">
+
 <body class="content">
 <header>
     {% block header %}{% endblock %}
