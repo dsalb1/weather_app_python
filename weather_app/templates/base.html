@@ -1,7 +1,11 @@
 <!doctype html>
 <html lang="en">
 <title>Weather App</title>
-<script src="{{ asset.url_for('main.js') }}"></script>
+{% block javascript %}
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script defer src="{{ asset.url_for('main.js') }}"></script>
+{% endblock %}
+
 <link rel="stylesheet" href="{{ asset.url_for('styles.css') }}">
 
 <body class="content">
@@ -17,7 +21,12 @@
     </ul>
   {% endif %}
 {% endwith %}
-{% block content %}
+
+{% block weather_form %}
 {% endblock %}
+
+{% block weather_display %}
+{% endblock %}
+
 </body>
 </html>

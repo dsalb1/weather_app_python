@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block javascript %}
+    {{ super() }}
+    <script defer src="{{ asset.url_for('vanilla.js') }}"></script>
+{% endblock %}
+
+{% block weather_form %}
+<div class="weather-box">
+    <h1>Weather App</h1>
+    <div class="weather-form">
+        <label>Please enter a location or zip code to get the weather</label>
+        <input name="q" type="text" required>
+        <input type="submit" value="Submit">
+    </div>
+</div>
+{% endblock %}
+
+{% block weather_display %}
+<div class="weather-res hide">
+    <span class="city"></span>
+    <span class="temp"></span>
+    <img class="weather-icon" src="" alt="City weather icon" width="40" height="40">
+    <span class="condition"></span>
+    <div class="forecast">
+        <span class="max"></span>
+        <span class="min"></span>
+    </div>
+</div>
+{% endblock %}

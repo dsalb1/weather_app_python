@@ -1,10 +1,8 @@
-import os
-
-import requests
 from flask import (
-    Flask,
     render_template,
-    request, flash
+    request,
+    flash,
+    Blueprint, jsonify
 )
 
 from requests import (
@@ -13,16 +11,13 @@ from requests import (
     JSONDecodeError
 )
 
-from services.weather_api import WeatherAPI
-from asset import Asset
+from weather_app.services.weather_api import WeatherAPI
 
-app = Flask(__name__)
-app.secret_key = os.urandom(24)
-Asset(app)
+weather_bp = Blueprint("weather", __name__)
 
 
-@app.route("/")
-def index():
+@weather_bp.route("/python")
+def weather_python():
     out = {}
     error = False
     message = ''
@@ -44,9 +39,20 @@ def index():
         if error:
             flash(message, 'warning')
 
-    return render_template("main.html", weather=out)
+    return render_template("main_python.html", weather=out)
 
 
-if __name__ == '__main__':
-    app.debug = True
-    app.run()
+@weather_bp.route("/js")
+def weather_js():
+    return render_template("main_js.html")
+
+
+@weather_bp.route("/js/api", methods=['POST'])
+def weather_js_api():
+    out = {}
+    query = request.form.get('q')
+    if query:
+        api = WeatherAPI(query)
+        out = api.get_forecast()
+
+    return jsonify(out)

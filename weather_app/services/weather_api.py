@@ -2,11 +2,14 @@ import requests
 
 
 class WeatherAPI:
-    base_url = 'https://api.weatherapi.com/v1/'
+    # base_url = 'https://api.weatherapi.com/v1/'
     # TODO put this somewhere safe
-    key = '6388de7763cf4326a19164156231302'
+    # key = '6388de7763cf4326a19164156231302'
 
     def __init__(self, query):
+        from weather_app.main import app
+        self.base_url = app.config["WEATHER_BASE_URL"]
+        self.key = app.config["WEATHER_API"]
         self.query = query
 
     def _make_request(self, path, **kwargs):

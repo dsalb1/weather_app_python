@@ -1,14 +1,17 @@
 {% extends 'base.html' %}
 
-{% block content %}
+{% block weather_form %}
 <div class="weather-box">
     <h1>Weather App</h1>
     <form class="weather-form" method="GET">
         <label>Please enter a location or zip code to get the weather</label>
-        <input name="q" type="text" value="{{ request.args.get('q')}}">
+        <input name="q" type="text" value="{{ request.args.get('q', '')}}" required>
         <input type="submit" value="Submit">
     </form>
 </div>
+{% endblock %}
+
+{% block weather_display %}
 {% if weather %}
     <div class="weather-res">
         <span class="city">{{ weather.city }}</span>
