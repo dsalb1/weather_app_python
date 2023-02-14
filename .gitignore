@@ -1,7 +1,13 @@
-.DS_Store
+# Node
+/assets/node_modules
+npm-debug.log
+yarn-error.log
 
-# git
+# System files
+.DS_Store
+Thumbs.db
+
+# IDEs and editors
 .idea/*
 
 __pycache__
-

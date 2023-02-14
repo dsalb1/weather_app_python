@@ -1,13 +1,24 @@
 {% extends 'base.html' %}
 
-{% block header %}
-  <h1>Weather App</h1>
-{% endblock %}
-
 {% block content %}
-  <form method="GET">
-        <label>Please enter your zip code to get the weather</label>
-        <input name="zipcode" type="text">
+<div class="weather-box">
+    <h1>Weather App</h1>
+    <form class="weather-form" method="GET">
+        <label>Please enter a location or zip code to get the weather</label>
+        <input name="q" type="text" value="{{ request.args.get('q')}}">
         <input type="submit" value="Submit">
     </form>
+</div>
+{% if weather %}
+    <div class="weather-res">
+        <span class="city">{{ weather.city }}</span>
+        <span class="temp">{{ weather.temp | round | int }}&deg;</span>
+        <img class="weather-icon" src="{{ weather.icon }}" alt="City weather icon" width="40" height="40">
+        <span class="condition">{{ weather.text }}</span>
+        <div class="forecast">
+            <span class="max">H: {{ weather.maxtemp | round | int }}&deg;</span>
+            <span class="min">L: {{ weather.mintemp | round | int }}&deg;</span>
+        </div>
+    </div>
+{% endif %}
 {% endblock %}

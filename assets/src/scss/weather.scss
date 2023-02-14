@@ -1,0 +1,62 @@
+div.weather-box, div.weather-res {
+    width: 300px;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+div.weather-box {
+    margin: 0 auto;
+    margin-top: 100px;
+    background-color: white;
+}
+
+form.weather-form {
+    margin: 0 auto;
+    label {
+        color: #b3b3b3;
+    }
+    input, label {
+        margin: 10px;
+        display: block;
+        width: 250px;
+    }
+    input[type=submit] {
+        padding: 8px 15px;
+        background-color: black;
+        color: white;
+        border-radius: 4px;
+        &:hover {
+            background-color: white;
+            color: black;
+            cursor: pointer;
+        }
+    }
+}
+
+div.weather-res {
+    background-color: #8585ad;
+    margin: 30px auto;
+    span {
+        color: white;
+        padding-top: 5px;
+        display: block;
+        text-align: center;
+        &.city {
+            font-size: 30px;
+        }
+        &.temp {
+            font-size: 50px;
+        }
+    }
+    img.weather-icon {
+        display: block;
+        margin: 0 auto;
+    }
+    .forecast {
+        display: flex;
+        justify-content: center;
+        span {
+            padding: 4px;
+        }
+    }
+}

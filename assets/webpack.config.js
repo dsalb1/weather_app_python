@@ -5,8 +5,8 @@ const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts')
 
 module.exports = {
   entry: {
-    main: './src/index.js',
-    styles: './src/styles.scss'
+    main: './src/js/index.js',
+    styles: './src/scss/index.scss'
   },
   output: {
     filename: '[name].[contenthash].js',
