@@ -18,6 +18,9 @@ $(function() {
                 console.log(data);
                 make_weather_display(data);
             }
-        )
+        ).fail(function(data, status) {
+            console.log(data.responseJSON["error"])
+            alert(data.responseJSON["error"]);
+        });
     });
 });

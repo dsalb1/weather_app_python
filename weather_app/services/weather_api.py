@@ -1,23 +1,33 @@
 import requests
 
+from flask import current_app
+
+
+class WeatherAPIError(Exception):
+    pass
+
 
 class WeatherAPI:
-    # base_url = 'https://api.weatherapi.com/v1/'
-    # TODO put this somewhere safe
-    # key = '6388de7763cf4326a19164156231302'
-
     def __init__(self, query):
-        from weather_app.main import app
-        self.base_url = app.config["WEATHER_BASE_URL"]
-        self.key = app.config["WEATHER_API"]
+        self.base_url = current_app.config["WEATHER_BASE_URL"]
+        self.key = current_app.config["WEATHER_API"]
         self.query = query
 
     def _make_request(self, path, **kwargs):
         params = {'key': self.key, 'q': self.query}
         params.update(kwargs)
-        res = requests.get(self.base_url + path, params=params)
-        res.raise_for_status()
-        return res.json()
+        try:
+            res = requests.get(self.base_url + path, params=params)
+            res.raise_for_status()
+            return res.json()
+        except (requests.HTTPError, requests.ConnectionError) as e:
+            message = f'There was an error requesting the Weather API data: {str(e)}'
+            print(message)
+            raise WeatherAPIError(message)
+        except (requests.JSONDecodeError, KeyError) as e:
+            message = f'There was an error parsing the JSON response from the Weather API: {str(e)}'
+            print(message)
+            raise WeatherAPIError(message)
 
     def get_forecast(self):
         req = self._make_request('forecast.json', days=1)

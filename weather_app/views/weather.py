@@ -5,13 +5,7 @@ from flask import (
     Blueprint, jsonify
 )
 
-from requests import (
-    HTTPError,
-    ConnectionError,
-    JSONDecodeError
-)
-
-from weather_app.services.weather_api import WeatherAPI
+from weather_app.services.weather_api import WeatherAPI, WeatherAPIError
 
 weather_bp = Blueprint("weather", __name__)
 
@@ -19,25 +13,14 @@ weather_bp = Blueprint("weather", __name__)
 @weather_bp.route("/python")
 def weather_python():
     out = {}
-    error = False
-    message = ''
     query = request.args.get('q')
 
     if query:
         api = WeatherAPI(query)
         try:
             out = api.get_forecast()
-        except (HTTPError, ConnectionError) as e:
-            error = True
-            message = 'There was an error requesting the Weather API data:'
-            print(message + ' ' + str(e))
-        except (JSONDecodeError, KeyError) as e:
-            error = True
-            message = 'There was an error parsing the JSON response from the Weather API:'
-            print(message + ' ' + str(e))
-
-        if error:
-            flash(message, 'warning')
+        except WeatherAPIError as e:
+            flash(str(e), 'warning')
 
     return render_template("main_python.html", weather=out)
 
@@ -53,6 +36,11 @@ def weather_js_api():
     query = request.form.get('q')
     if query:
         api = WeatherAPI(query)
-        out = api.get_forecast()
+        try:
+            out = api.get_forecast()
+        except WeatherAPIError as e:
+            out = {'error': str(e)}
+            # just call any error a generic 400 for now, this was already logged anyway
+            return jsonify(out), 400
 
     return jsonify(out)
