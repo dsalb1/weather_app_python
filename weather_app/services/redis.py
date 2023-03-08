@@ -5,7 +5,7 @@ import redis
 r = redis.Redis(host='redis', port=6379)
 
 
-class Redis:    
+class Redis:
     def __init__(self):
         self.redis = r
 
@@ -23,7 +23,7 @@ class Redis:
                     raise err
                 retries -= 1
                 time.sleep(0.5)
-    
+
     def set_dict(self, k, v):
         print('setting ' + k)
         self.redis.set(k, json.dumps(v), 30)

@@ -1,9 +1,7 @@
-import json
+from flask import Flask
 
-from flask import  Flask
-
-from weather_app.views.weather import weather_bp
-from weather_app.services.asset import Asset
+from views.weather import weather_bp
+from services.asset import Asset
 
 app = Flask(__name__)
 

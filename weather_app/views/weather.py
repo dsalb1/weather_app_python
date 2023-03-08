@@ -5,7 +5,7 @@ from flask import (
     Blueprint, jsonify
 )
 
-from weather_app.services.weather_api import WeatherAPI, WeatherAPIError
+from services.weather_api import WeatherAPI, WeatherAPIError
 
 weather_bp = Blueprint("weather", __name__)
 

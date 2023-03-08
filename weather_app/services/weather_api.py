@@ -3,7 +3,7 @@ import requests
 
 from flask import current_app
 
-from weather_app.services.redis import Redis
+from services.redis import Redis
 
 
 class WeatherAPIError(Exception):
