@@ -1,5 +1,5 @@
 # Node
-/assets/node_modules
+/node_modules
 npm-debug.log
 yarn-error.log
 
@@ -8,7 +8,7 @@ yarn-error.log
 Thumbs.db
 
 # Settings
-config.json
+.env*
 
 # IDEs and editors
 .idea/*
