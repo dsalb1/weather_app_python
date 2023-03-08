@@ -23,7 +23,7 @@ class WeatherAPI:
             req = self._make_request('forecast.json', days=1)
             self.redis.set_dict(self.query, req)
         return self._build_forecast(req)
-    
+
     def _make_request(self, path, **kwargs):
         params = {'key': self.key, 'q': self.query}
         params.update(kwargs)
@@ -33,11 +33,9 @@ class WeatherAPI:
             return res.json()
         except (requests.HTTPError, requests.ConnectionError) as err:
             message = f'There was an error requesting the Weather API data: {str(err)}'
-            print(message)
             raise WeatherAPIError(message) from err
         except (requests.JSONDecodeError, KeyError) as err:
             message = f'There was an error parsing the JSON response from the Weather API: {str(err)}'
-            print(message)
             raise WeatherAPIError(message) from err
 
     def _build_forecast(self, weather_data):

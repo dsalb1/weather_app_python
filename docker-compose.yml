@@ -1,12 +1,12 @@
 version: "3.9"
 services:
   web:
-    build: .
+    build: ./web
     command: gunicorn --bind 0.0.0.0:5000 main:app
     expose:
       - 5000
     volumes:
-      - .:/weather_app
+      - ./web:/web
     env_file:
       - ./.env
     environment:

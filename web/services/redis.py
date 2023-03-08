@@ -12,10 +12,9 @@ class Redis:
     def get_dict(self, k):
         retries = 5
         while True:
-            try: 
+            try:
                 val = self.redis.get(k)
                 if val:
-                    print('Retrieved ' + k)
                     val = json.loads(val)
                 return val
             except redis.exceptions.ConnectionError as err:
@@ -25,5 +24,4 @@ class Redis:
                 time.sleep(0.5)
 
     def set_dict(self, k, v):
-        print('setting ' + k)
         self.redis.set(k, json.dumps(v), 30)

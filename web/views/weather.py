@@ -2,7 +2,8 @@ from flask import (
     render_template,
     request,
     flash,
-    Blueprint, jsonify
+    Blueprint,
+    jsonify
 )
 
 from services.weather_api import WeatherAPI, WeatherAPIError
@@ -40,7 +41,7 @@ def weather_js_api():
             out = api.get_forecast()
         except WeatherAPIError as e:
             out = {'error': str(e)}
-            # just call any error a generic 400 for now, this was already logged anyway
+            # call any error a generic 400 for now
             return jsonify(out), 400
 
     return jsonify(out)

@@ -12,7 +12,7 @@ module.exports = {
   output: {
     filename: '[name].[contenthash].js',
     publicPath: '/static/dist/',
-    path: path.resolve(__dirname, '.','weather_app', 'static', 'dist'),
+    path: path.resolve(__dirname, '.','web', 'static', 'dist'),
     clean: true
   },
   module: {
