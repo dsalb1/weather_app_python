@@ -31,6 +31,11 @@ def weather_js():
     return render_template("main_js.html")
 
 
+@weather_bp.route("/vue/js")
+def weather_vue_js():
+    return render_template("vue_js.html")
+
+
 @weather_bp.route("/js/api", methods=['POST'])
 def weather_js_api():
     out = {}

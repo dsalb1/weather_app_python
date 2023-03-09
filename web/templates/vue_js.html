@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block javascript %}
+{{ super() }}
+    <script defer src="https://unpkg.com/vue@next"></script>
+    <script defer src="{{ asset.url_for('vue.js') }}"></script>
+{% endblock %}
+
+{% block weather_form %}
+<div class="weather-box">
+    <h1>Weather App</h1>
+    <div class="weather-form">
+        <label>Please enter a location or zip code to get the weather</label>
+        <input v-model="enteredQuery" name="q" type="text" required>
+        <input @click="fetchWeatherApi" type="submit" value="Submit">
+    </div>
+</div>
+{% endblock %}
+
+{% block weather_display %}
+<div class="weather-res" :class="{'hide' : isHidden}">
+    <span v-text="city" class="city"></span>
+    <span v-text="temp" class="temp"></span>
+    <img class="weather-icon" v-bind:src="icon" alt="City weather icon" width="40" height="40">
+    <span v-text="text" class="condition"></span>
+    <div class="forecast">
+        <span v-text="max" class="max"></span>
+        <span v-text="min" class="min"></span>
+    </div>
+</div>
+{% endblock %}

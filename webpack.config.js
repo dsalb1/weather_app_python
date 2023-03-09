@@ -6,7 +6,8 @@ const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts')
 module.exports = {
   entry: {
     main: '/src/js/index.js',
-    vanilla: '/src/js/vanilla_js.js',
+    vanilla: '/src/js/vanilla.js',
+    vue: '/src/js/vue.js',
     styles: '/src/scss/index.scss'
   },
   output: {

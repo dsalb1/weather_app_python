@@ -1,5 +1,5 @@
 $(function() {
-    var make_weather_display = function(data) {
+    var makeWeatherDisplay = function(data) {
         $('.weather-res .city').text(data.city);
         $('.weather-res .temp').text(data.temp);
         $('.weather-res img').attr("src", data.icon);
@@ -10,16 +10,21 @@ $(function() {
     }
     $('.weather-box input[type=submit]').click(function() {
         var query = $('.weather-box input[type=text]').val();
-        $.post("js/api",
+        if (!query) {
+            $('.weather-res').addClass("hide");
+            return;
+        };
+        $.post("/weather/js/api",
             {
                 q: query,
             },
             function(data, status) {
                 console.log(data);
-                make_weather_display(data);
+                makeWeatherDisplay(data);
             }
         ).fail(function(data, status) {
-            console.log(data.responseJSON["error"])
+            $('.weather-res').addClass("hide");
+            console.log(data.responseJSON["error"]);
             alert(data.responseJSON["error"]);
         });
     });
